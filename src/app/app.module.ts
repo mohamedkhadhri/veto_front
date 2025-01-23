@@ -1,21 +1,22 @@
-import { bootstrapApplication } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { importProvidersFrom } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { ReactiveFormsModule } from '@angular/forms';
-import { AnimalsComponent } from './modules/animals/animals.component';
+import { AnimalsListComponent } from './animals-list/animals-list.component';
+import { HttpClientModule } from '@angular/common/http';
 
-// Définissez les routes
-const appRoutes: Routes = [
-  { path: '', component: AnimalsComponent }, // Exemple de route vers AnimalsComponent
-];
-
-// Bootstrap de l'application
-bootstrapApplication(AppComponent, {
-  providers: [
-    importProvidersFrom(
-      RouterModule.forRoot(appRoutes),
-      ReactiveFormsModule
-    ),
+@NgModule({
+  declarations: [
+    AppComponent,
+    AnimalsListComponent
   ],
-}).catch((err) => console.error(err));
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
