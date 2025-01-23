@@ -9,7 +9,8 @@ export const routes: Routes = [
   { path: 'MedicalReport', loadChildren: () => import('./modules/medical-report/medical-report.module').then(m => m.MedicalReportModule) },
   { path: 'Rendez-vous', loadChildren: () => import('./modules/rendez-vous/rendez-vous.module').then(m => m.RendezVousModule) },
   { path: 'Animals', component: AnimalsComponent },
-  { path: 'animals', loadChildren: () => import('./modules/animals/animals.module').then(m => m.AnimalsModule) }
+  { path: 'animals', loadChildren: () => import('./modules/animals/animals.module').then(m => m.AnimalsModule) },
+  { path: 'dashboard', loadChildren: () => import('./modules/dashboard/dashboard.module').then(m => m.DashboardModule) }
 ];
 
 @NgModule({
