@@ -1,5 +1,5 @@
-
 /* styles.css */
+
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f9;
@@ -12,17 +12,18 @@ body {
   }
   
   .form-container {
-    background: #fff;
+    background: #ffffff;
     padding: 20px 30px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     width: 100%;
-    max-width: 400px;
+    max-width: 500px;
   }
   
   h2 {
     text-align: center;
     color: #333;
+    margin-bottom: 20px;
   }
   
   .form-group {
@@ -36,24 +37,26 @@ body {
     color: #555;
   }
   
-  input[type="text"],
-  input[type="number"],
-  input[type="file"],
+  input,
   select {
     width: 100%;
     padding: 10px;
-    margin: 5px 0 10px;
+    font-size: 14px;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
   }
   
-  input[type="file"] {
-    padding: 3px;
+  input:focus,
+  select:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
   }
   
-  select {
-    cursor: pointer;
+  ::placeholder {
+    color: #aaa;
+    font-style: italic;
   }
   
   .btn-submit {
@@ -71,6 +74,6 @@ body {
   }
   
   .btn-submit:hover {
-    background-color: #45a049;
+    background-color: #4CAF50;
   }
   

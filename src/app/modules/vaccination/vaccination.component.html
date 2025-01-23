@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vaccination Form</title>
+  <link rel="stylesheet" href="./vaccination.component.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Vaccination Details</h1>
+    <form class="vaccination-form">
+      <div class="form-group">
+        <label for="vaccinationName">Vaccination Name:</label>
+        <input type="text" id="vaccinationName" name="vaccinationName" placeholder="Enter vaccination name" required>
+      </div>
+      <div class="form-group">
+        <label for="vaccinationDate">Vaccination Date:</label>
+        <input type="date" id="vaccinationDate" name="vaccinationDate" required>
+      </div>
+      <button type="submit" class="submit-button">Submit</button>
+    </form>
+  </div>
+</body>
+</html>
