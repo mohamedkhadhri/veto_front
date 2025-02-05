@@ -10,7 +10,8 @@ import { AnimalsService } from '../services/animals.service';
 })
 export class AnimalsListComponent {
 
-  animals = [];
+  animals: any[] = [];
+
   constructor(private animalService: AnimalsService) { }
 
   ngOnInit(){
