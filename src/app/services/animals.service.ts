@@ -1,22 +1,21 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-const BASE_URL = "http://localhost:4090/api/animals"
+
+const BASE_URL = "http://localhost:4090/api";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AnimalsService {
-
   constructor(private http: HttpClient) {}
 
   registerAnimal(data: FormData): Observable<any> {
-    console.log("INSIDE ANIMALS SERVICE")
-    return this.http.post(BASE_URL, data);
+    console.log("INSIDE ANIMALS SERVICE");
+    return this.http.post(`${BASE_URL}/animals`, data);
   }
 
-  getAllAnimals() : Observable<any>{
-    return this.http.get(BASE_URL);
+  getAllUsers(): Observable<any> {
+    return this.http.get(`${BASE_URL}/users`);
   }
-
 }

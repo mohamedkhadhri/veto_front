@@ -1,39 +1,40 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AnimalsService } from '../services/animals.service';
+import { Animal } from '../models/animal.model';
 
 @Component({
   selector: 'app-animals-list',
-  standalone: false,
-  
   templateUrl: './animals-list.component.html',
-  styleUrl: './animals-list.component.css'
+  styleUrls: ['./animals-list.component.css'],
+  standalone: false
 })
-export class AnimalsListComponent {
+export class AnimalsListComponent implements OnInit {
+  animals: Animal[] = [];
 
-  animals: any[] = [];
+  constructor(private animalService: AnimalsService) {}
 
-  constructor(private animalService: AnimalsService) { }
-
-  ngOnInit(){
-    this.getAllAnimals();
+  ngOnInit() {
+    this.getAllUsers();
   }
 
-
-  getAllAnimals(){
-    this.animalService.getAllAnimals().subscribe(
-      (response) => {
-        console.log("ANIMALS : " , response)
-        this.animals=response;
+  getAllUsers() {
+    this.animalService.getAllUsers().subscribe(
+      (response: any[]) => {
+        console.log("USERS:", response);
+        this.animals = response.flatMap(user => 
+          user.animals.map((animal: Animal) => ({
+            ...animal,
+            owner: user.username
+          }))
+        );
       },
       (error) => {
-        console.log("ERROR : " , error)
+        console.log("ERROR:", error);
       }
-    )
+    );
   }
 
-  onDetailsClick(animal: any) {
-    alert(`You clicked on ${animal.name}`);
-    // You can navigate to a details page or perform other actions here.
+  onDetailsClick(animal: Animal) {
+    alert(`You clicked on ${animal.name} owned by ${animal.owner}`);
   }
-
 }

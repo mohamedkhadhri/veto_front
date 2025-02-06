@@ -1,3 +1,5 @@
+<!-- src/app/animals-list/animals-list.component.html -->
+
 <div class="animal-container">
   <div
     *ngFor="let a of animals; let i = index"
@@ -15,6 +17,7 @@
       <p class="animal-info"><strong>Race:</strong> {{ a.race }}</p>
       <p class="animal-info"><strong>Gender:</strong> {{ a.gender }}</p>
       <p class="animal-info"><strong>Weight:</strong> {{ a.weight }} kg</p>
+      <p class="animal-info"><strong>Owner:</strong> {{ a.owner }}</p>
       <button class="details-button" (click)="onDetailsClick(a)">View Details</button>
     </div>
   </div>
