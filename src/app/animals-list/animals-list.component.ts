@@ -37,4 +37,9 @@ export class AnimalsListComponent implements OnInit {
   onDetailsClick(animal: Animal) {
     alert(`You clicked on ${animal.name} owned by ${animal.owner}`);
   }
+
+  setDefaultImage(event: Event) {
+    const imgElement = event.target as HTMLImageElement;
+    imgElement.src = 'assets/images/default-pet.png';
+  }
 }

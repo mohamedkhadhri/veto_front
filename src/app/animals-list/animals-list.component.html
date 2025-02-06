@@ -7,7 +7,8 @@
     [style.borderColor]="a.gender === 'Male' ? '#3498DB' : '#E74C3C'"
   >
     <img
-      [src]="'assets/images/' + a.image"
+      [src]="'assets/images/' + (a.image !== '' ? a.image : 'default-pet.png')"
+      (error)="setDefaultImage($event)"
       alt="{{ a.name }}"
       class="animal-image"
     />
