@@ -1,3 +1,21 @@
-<div *ngFor="let a of animals">
-    {{a.name}}
+<div class="animal-container">
+  <div
+    *ngFor="let a of animals; let i = index"
+    class="animal-card"
+    [style.borderColor]="a.gender === 'Male' ? '#3498DB' : '#E74C3C'"
+  >
+    <img
+      [src]="'assets/images/' + a.image"
+      alt="{{ a.name }}"
+      class="animal-image"
+    />
+    <div class="card-content">
+      <h2 class="animal-name">{{ a.name }}</h2>
+      <p class="animal-info"><strong>Age:</strong> {{ a.age }} years</p>
+      <p class="animal-info"><strong>Race:</strong> {{ a.race }}</p>
+      <p class="animal-info"><strong>Gender:</strong> {{ a.gender }}</p>
+      <p class="animal-info"><strong>Weight:</strong> {{ a.weight }} kg</p>
+      <button class="details-button" (click)="onDetailsClick(a)">View Details</button>
+    </div>
+  </div>
 </div>

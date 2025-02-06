@@ -31,4 +31,9 @@ export class AnimalsListComponent {
     )
   }
 
+  onDetailsClick(animal: any) {
+    alert(`You clicked on ${animal.name}`);
+    // You can navigate to a details page or perform other actions here.
+  }
+
 }
