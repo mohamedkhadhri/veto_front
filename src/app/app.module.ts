@@ -10,6 +10,8 @@ import { FooterComponent } from './footer/footer.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { ReactiveFormsModule } from '@angular/forms';  // ✅ Import this module
+
 
 // ✅ Import Angular Material Modules
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -37,7 +39,8 @@ import { MatInputModule } from '@angular/material/input';
     MatIconModule,    // ✅ Icons for Header & Footer
     MatMenuModule,    // ✅ Menu for Additional Features
     MatFormFieldModule, // ✅ Form fields for Login & Register
-    MatInputModule     // ✅ Input fields for Forms
+    MatInputModule,     // ✅ Input fields for Forms
+    ReactiveFormsModule
   ],
   providers: [
     provideAnimationsAsync()
