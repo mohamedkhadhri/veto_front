@@ -1,1 +1,42 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  background: #f9fafb;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.header-toolbar {
+  background: white;
+  color: black;
+  padding: 15px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.logo {
+  height: 40px;
+  margin-right: 20px;
+}
+
+.nav-menu {
+  display: flex;
+  gap: 20px;
+  flex-grow: 1;
+  justify-content: center;
+}
+
+.header-buttons button {
+  margin-left: 10px;
+}
+
+/* Footer styles removed from here */
