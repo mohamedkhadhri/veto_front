@@ -1,0 +1,42 @@
+<h2 mat-dialog-title>Add Appointment</h2>
+<form (ngSubmit)="onSubmit()" #form="ngForm">
+  <mat-form-field appearance="outline" class="form-group">
+    <mat-label>Title</mat-label>
+    <input
+      matInput
+      type="text"
+      [(ngModel)]="newAppointment.title"
+      name="title"
+      required
+      placeholder="Enter title"
+    />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="form-group">
+    <mat-label>Description</mat-label>
+    <input
+      matInput
+      type="text"
+      [(ngModel)]="newAppointment.description"
+      name="description"
+      required
+      placeholder="Enter description"
+    />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="form-group">
+    <mat-label>Date</mat-label>
+    <input
+      matInput
+      type="date"
+      [(ngModel)]="newAppointment.date"
+      name="date"
+      required
+    />
+  </mat-form-field>
+
+  <div class="dialog-actions">
+    <button mat-raised-button color="primary" type="submit">Submit</button>
+    <button mat-raised-button color="warn" (click)="onCancel()">Cancel</button>
+  </div>
+</form>

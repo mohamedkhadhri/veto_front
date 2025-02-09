@@ -1,0 +1,58 @@
+/* Style pour les boutons d'action */
+button.mat-icon-button {
+  margin-right: 8px; /* Ajoute un espacement entre les boutons */
+}
+
+/* Style pour la table */
+table.mat-elevation-z8 {
+  width: 100%; /* Utiliser toute la largeur disponible */
+  margin-top: 16px;
+  border-collapse: collapse; /* Améliore la présentation du tableau */
+}
+
+mat-header-cell {
+  background-color: #f1f1f1; /* Couleur de fond des en-têtes */
+  font-weight: bold; /* Mettre en gras les en-têtes */
+  color: #3f51b5; /* Couleur des textes d'en-têtes */
+  text-align: center; /* Centrer le texte dans les en-têtes */
+}
+
+.mat-cell, .mat-header-cell {
+  padding: 12px;
+  text-align: center; /* Centrer le contenu dans les cellules */
+}
+
+.mat-row:nth-child(even) {
+  background-color: #f9f9f9; /* Alternance de couleur des lignes */
+}
+
+/* Effet de survol des lignes */
+mat-row:hover {
+  background-color: #e0e0e0;
+  cursor: pointer;
+}
+
+/* Stylisation des boutons d'action */
+button.mat-icon-button {
+  border-radius: 4px; /* Coins arrondis pour les boutons */
+  padding: 8px;
+}
+
+/* Amélioration de l'espacement du tableau */
+table {
+  margin-bottom: 20px;
+}
+
+/* Ajout d'un effet de transition au survol */
+mat-row, mat-header-row {
+  transition: background-color 0.3s ease;
+}
+
+mat-header-cell {
+  cursor: pointer; /* Pointer pour signaler qu'il est interactif */
+}
+
+/* Mise en surbrillance lors de la sélection des lignes */
+mat-row.selected {
+  background-color: #dbe0e3; /* Légère surbrillance sur la ligne sélectionnée */
+}

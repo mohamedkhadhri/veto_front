@@ -1,0 +1,30 @@
+<h2 mat-dialog-title>Appointments</h2>
+<button mat-raised-button color="primary" (click)="openCreateDialog()">Add Appointment</button>
+
+<table mat-table [dataSource]="appointments" class="mat-elevation-z8">
+  <ng-container matColumnDef="title">
+    <th mat-header-cell *matHeaderCellDef>Title</th>
+    <td mat-cell *matCellDef="let appointment">{{ appointment.title }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="description">
+    <th mat-header-cell *matHeaderCellDef>Description</th>
+    <td mat-cell *matCellDef="let appointment">{{ appointment.description }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="date">
+    <th mat-header-cell *matHeaderCellDef>Date</th>
+    <td mat-cell *matCellDef="let appointment">{{ appointment.date }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef>Actions</th>
+    <td mat-cell *matCellDef="let appointment">
+      <button mat-raised-button (click)="editAppointment(appointment)">Edit</button>
+      <button mat-raised-button (click)="deleteAppointment(appointment.id)">Delete</button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
