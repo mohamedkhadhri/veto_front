@@ -23,20 +23,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 // Composants standard
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { RegisterComponent } from './auth/signup/signup.component';
+
+// Importation des composants standalone
+import { LoginComponent } from './auth/login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AnimalsListComponent,
     HeaderComponent,
-    FooterComponent,
-    LoginComponent,
-    RegisterComponent,
-    
-    // Ne déclarez pas AppointmentComponent et AppointmentDialogComponent ici s'ils sont standalone
+    FooterComponent    // Nous n'ajoutons pas LoginComponent et SignupComponent dans `declarations` ici car ce sont des composants standalone
   ],
   imports: [
     BrowserModule,
@@ -52,12 +49,13 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     MatFormFieldModule, // Champs de formulaire pour login & register
     MatInputModule, // Entrées de texte pour les formulaires
     MatListModule, // Listes
-    MatDialogModule // Dialogues modaux
-    
+    MatDialogModule, // Dialogues modaux
+
+    // Importation des composants standalone
+    LoginComponent,
+    RegisterComponent
   ],
-  providers: [
-    provideAnimationsAsync()
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
