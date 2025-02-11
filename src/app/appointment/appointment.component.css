@@ -1,58 +1,87 @@
-/* Style pour les boutons d'action */
-button.mat-icon-button {
-  margin-right: 8px; /* Ajoute un espacement entre les boutons */
+.container {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Style pour la table */
-table.mat-elevation-z8 {
-  width: 100%; /* Utiliser toute la largeur disponible */
-  margin-top: 16px;
-  border-collapse: collapse; /* Améliore la présentation du tableau */
-}
-
-mat-header-cell {
-  background-color: #f1f1f1; /* Couleur de fond des en-têtes */
-  font-weight: bold; /* Mettre en gras les en-têtes */
-  color: #3f51b5; /* Couleur des textes d'en-têtes */
-  text-align: center; /* Centrer le texte dans les en-têtes */
-}
-
-.mat-cell, .mat-header-cell {
-  padding: 12px;
-  text-align: center; /* Centrer le contenu dans les cellules */
-}
-
-.mat-row:nth-child(even) {
-  background-color: #f9f9f9; /* Alternance de couleur des lignes */
-}
-
-/* Effet de survol des lignes */
-mat-row:hover {
-  background-color: #e0e0e0;
-  cursor: pointer;
-}
-
-/* Stylisation des boutons d'action */
-button.mat-icon-button {
-  border-radius: 4px; /* Coins arrondis pour les boutons */
-  padding: 8px;
-}
-
-/* Amélioration de l'espacement du tableau */
-table {
+h2 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
   margin-bottom: 20px;
 }
 
-/* Ajout d'un effet de transition au survol */
-mat-row, mat-header-row {
+button.mat-raised-button {
+  margin-bottom: 20px;
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+button.mat-raised-button:hover {
+  background-color: #0056b3;
+}
+
+.table-container {
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+table {
+  width: 100%;
+  border-radius: 8px;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+}
+
+th {
+  font-weight: 600;
+  background-color: #f1f1f1;
+  color: #333;
+}
+
+td {
+  background-color: #fafafa;
+}
+
+tr:nth-child(even) td {
+  background-color: #f9f9f9;
+}
+
+.mat-icon-button {
+  margin: 0 6px;
+}
+
+.mat-elevation-z8 {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.mat-icon {
+  font-size: 18px;
+}
+
+.mat-icon-button:hover {
+  background-color: #f1f1f1;
+}
+
+.mat-header-cell {
+  font-size: 16px;
+}
+
+.mat-row {
   transition: background-color 0.3s ease;
 }
 
-mat-header-cell {
-  cursor: pointer; /* Pointer pour signaler qu'il est interactif */
-}
-
-/* Mise en surbrillance lors de la sélection des lignes */
-mat-row.selected {
-  background-color: #dbe0e3; /* Légère surbrillance sur la ligne sélectionnée */
+.mat-row:hover {
+  background-color: #e9ecef;
 }

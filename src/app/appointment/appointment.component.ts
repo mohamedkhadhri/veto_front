@@ -1,7 +1,8 @@
-// appointment.component.ts
 import { Component, Inject } from '@angular/core';
-import { MatTableModule } from '@angular/material/table'; // Importez ce module
+import { CommonModule } from '@angular/common';
+import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AppointmentService } from '../services/appointment.service';
@@ -13,11 +14,11 @@ import { AppointmentDialogComponent } from '../appointment-dialog/appointment-di
   templateUrl: './appointment.component.html',
   styleUrls: ['./appointment.component.css'],
   standalone: true,
-  imports: [MatTableModule] // Ajoutez ici
+  imports: [CommonModule, MatTableModule, MatIconModule, MatButtonModule]
 })
 export class AppointmentComponent {
   appointments: Appointment[] = [];
-  displayedColumns: string[] = ['title', 'description', 'date', 'actions'];
+  displayedColumns: string[] = ['date', 'actions'];
 
   constructor(
     private appointmentService: AppointmentService,
@@ -44,9 +45,11 @@ export class AppointmentComponent {
 
   openCreateDialog(): void {
     const dialogRef = this.dialog.open(AppointmentDialogComponent, {
-      width: '400px',
+      width: '500px',  // Set the width as per new design
+      height: 'auto',  // Make sure it adapts to content height
+      panelClass: 'custom-dialog-container'  // Optional: Define custom dialog styles
     });
-
+  
     dialogRef.afterClosed().subscribe((result: Appointment | undefined) => {
       if (result) {
         this.appointmentService.createAppointment(result).subscribe(
@@ -55,8 +58,9 @@ export class AppointmentComponent {
             this.snackBar.open('Rendez-vous créé avec succès', 'Fermer', {
               duration: 3000,
             });
+            this.loadAppointments();
           },
-          (error) => {
+          () => {
             this.snackBar.open('Échec de la création du rendez-vous', 'Fermer', {
               duration: 3000,
             });
@@ -65,6 +69,7 @@ export class AppointmentComponent {
       }
     });
   }
+  
 
   editAppointment(appointment: Appointment): void {
     const dialogRef = this.dialog.open(AppointmentDialogComponent, {
@@ -77,22 +82,17 @@ export class AppointmentComponent {
         this.appointmentService.updateAppointment(result.id, result).subscribe(
           (updatedAppointment) => {
             if (updatedAppointment) {
-              const index = this.appointments.findIndex(
-                (a) => a.id === updatedAppointment.id
-              );
+              const index = this.appointments.findIndex(a => a.id === updatedAppointment.id);
               if (index !== -1) {
                 this.appointments[index] = updatedAppointment;
                 this.snackBar.open('Rendez-vous mis à jour avec succès', 'Fermer', {
                   duration: 3000,
                 });
+                this.loadAppointments();
               }
-            } else {
-              this.snackBar.open('Échec de la mise à jour du rendez-vous', 'Fermer', {
-                duration: 3000,
-              });
             }
           },
-          (error) => {
+          () => {
             this.snackBar.open('Erreur lors de la mise à jour du rendez-vous', 'Fermer', {
               duration: 3000,
             });
@@ -111,7 +111,7 @@ export class AppointmentComponent {
           });
           this.loadAppointments();
         },
-        (error) => {
+        () => {
           this.snackBar.open('Échec de la suppression du rendez-vous', 'Fermer', {
             duration: 3000,
           });
@@ -120,5 +120,13 @@ export class AppointmentComponent {
     } else {
       this.snackBar.open('ID invalide', 'Fermer', { duration: 3000 });
     }
+  }
+
+  acceptAppointment(appointment: Appointment): void {
+    
+  }
+
+  rejectAppointment(appointment: Appointment): void {
+    
   }
 }

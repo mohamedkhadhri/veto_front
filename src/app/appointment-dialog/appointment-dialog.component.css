@@ -1,59 +1,72 @@
-/* appointment-dialog.component.css */
-.appointment-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
+/* Increase modal size */
+::ng-deep .mat-dialog-container {
+  min-width: 500px; /* Increase width */
+  max-width: 700px; /* Further adjust maximum width */
+  padding: 30px; /* Add more padding */
+  border-radius: 8px; /* Rounded corners for modern look */
+  background-color: #fff; /* White background for clean look */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+  transition: all 0.3s ease-in-out; /* Smooth transition for opening */
 }
 
-.appointment-card {
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 20px;
-  width: 100%;
-  max-width: 400px;
-  background-color: #f9f9f9;
-}
-
-.appointment-title {
+/* Header style */
+.mat-dialog-title {
   font-size: 1.5rem;
+  font-weight: 600;
+  color: #333; /* Darker text for readability */
+  margin-bottom: 20px; /* Add space below header */
+  text-align: center; /* Center the header */
+}
+
+/* Form container for clean layout */
+.form-container {
+  display: grid;
+  gap: 24px; /* Add more space between fields */
   margin-bottom: 20px;
-  text-align: center;
 }
 
-.form-group {
-  margin-bottom: 15px;
-}
-
-.form-label {
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-
-.form-input {
+/* Adjust form fields */
+mat-form-field {
   width: 100%;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  font-size: 1rem; /* Uniform font size for better readability */
 }
 
-.button-group {
+/* Label style */
+mat-label {
+  font-weight: 500;
+  font-size: 1.1rem;
+  color: #555;
+}
+
+/* Style for action buttons */
+.dialog-actions {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
+  gap: 15px; /* Space between buttons */
 }
 
-.submit-button,
-.cancel-button {
-  padding: 10px 15px;
-  border: none;
-  border-radius: 4px;
+.dialog-actions button {
+  min-width: 120px;
+  font-size: 1rem;
+  padding: 10px 20px;
+  border-radius: 4px; /* Round button corners */
+}
+
+button.mat-raised-button {
+  text-transform: none; /* Prevent uppercase text */
+}
+
+button.mat-raised-button.mat-primary {
+  background-color: #007bff; /* Primary button color */
   color: white;
-  cursor: pointer;
 }
 
-.submit-button {
-  background-color: #3498db;
+button.mat-raised-button.mat-warn {
+  background-color: #e74c3c; /* Warning button color */
+  color: white;
 }
 
-.cancel-button {
-  background-color: #e74c3c;
+/* Datepicker input field styling */
+mat-input-element {
+  font-size: 1rem;
 }

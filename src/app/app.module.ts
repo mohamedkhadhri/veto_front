@@ -27,14 +27,18 @@ import { RegisterComponent } from './auth/signup/signup.component';
 
 // Importation des composants standalone
 import { LoginComponent } from './auth/login/login.component';
+import { UsersComponent } from './users/users.component';
+import { EditUserDialogComponent } from './edit-user-dialog-component/edit-user-dialog-component.component';
+import { CreateUserDialogComponent } from './create-user-dialog/create-user-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AnimalsListComponent,
     HeaderComponent,
-    FooterComponent    // Nous n'ajoutons pas LoginComponent et SignupComponent dans `declarations` ici car ce sont des composants standalone
-  ],
+    FooterComponent,
+    CreateUserDialogComponent
+    ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule, // Activer les animations

@@ -1,18 +1,19 @@
-// appointment-dialog.component.ts
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Appointment } from '../models/appointment.model';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { ReactiveFormsModule } from '@angular/forms'; // Nécessaire pour les formulaires réactifs
+import { ReactiveFormsModule } from '@angular/forms'; // Necessary for reactive forms
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
-import { CommonModule } from '@angular/common'; // Nécessaire pour standalone components
-import { FormsModule } from '@angular/forms'; // Nécessaire pour ngModel
+import { CommonModule } from '@angular/common'; // Necessary for standalone components
+import { FormsModule } from '@angular/forms'; // Necessary for ngModel
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker'; // Time picker module
 
 @Component({
   selector: 'app-appointment-dialog',
-  standalone: true,  // Indiquer que c'est un composant standalone
+  standalone: true,  // Indicating that this is a standalone component
   imports: [
     CommonModule,
     MatFormFieldModule,
@@ -20,17 +21,17 @@ import { FormsModule } from '@angular/forms'; // Nécessaire pour ngModel
     ReactiveFormsModule,
     MatButtonModule,
     MatDialogModule,
-    FormsModule  // Ajout de FormsModule pour utiliser ngModel
-  ],  // Déclaration des imports nécessaires pour le composant
+    MatDatepickerModule,
+    NgxMaterialTimepickerModule,
+    FormsModule,  // Adding FormsModule for ngModel
+  ],  // Import necessary modules
   templateUrl: './appointment-dialog.component.html',
   styleUrls: ['./appointment-dialog.component.css'],
 })
 export class AppointmentDialogComponent {
   newAppointment: Appointment = {
     id: null,
-    title: '',
-    description: '',
-    date: '',
+    date: new Date(),  // Initialize with the current date and time
   };
 
   constructor(
@@ -38,17 +39,17 @@ export class AppointmentDialogComponent {
     @Inject(MAT_DIALOG_DATA) public data: Appointment | null
   ) {
     if (data) {
-      this.newAppointment = { ...data }; // Pré-remplir le formulaire si c'est une modification
+      this.newAppointment = { ...data }; // Pre-fill the form if it's an edit
     }
   }
 
   onSubmit(): void {
-    if (this.newAppointment.title && this.newAppointment.description && this.newAppointment.date) {
-      this.dialogRef.close(this.newAppointment); // Fermer le dialogue et retourner les données
+    if (this.newAppointment.date) {
+      this.dialogRef.close(this.newAppointment); // Close the dialog and return the data
     }
   }
 
   onCancel(): void {
-    this.dialogRef.close(); // Fermer le dialogue sans retourner de données
+    this.dialogRef.close(); // Close the dialog without returning data
   }
 }

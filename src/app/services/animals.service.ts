@@ -11,11 +11,23 @@ export class AnimalsService {
   constructor(private http: HttpClient) {}
 
   registerAnimal(data: FormData): Observable<any> {
-    console.log("INSIDE ANIMALS SERVICE");
     return this.http.post(`${BASE_URL}/animals`, data);
   }
 
   getAllUsers(): Observable<any> {
     return this.http.get(`${BASE_URL}/users`);
   }
+
+  deleteUser(userId: string): Observable<any> {
+    return this.http.delete(`${BASE_URL}/users/${userId}`);
+  }
+
+  updateUser(user: any): Observable<any> {
+    return this.http.put(`${BASE_URL}/users/${user.id}`, user);
+  }
+
+  createUser(user: any): Observable<any> {
+    return this.http.post(`${BASE_URL}/users`, user);
+  }
+  
 }
