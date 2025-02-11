@@ -7,8 +7,18 @@ import { AppointmentComponent } from './appointment/appointment.component'; // I
 import { LoginComponent } from './auth/login/login.component'; // Assurez-vous d'importer le LoginComponent
 import { RegisterComponent } from './auth/signup/signup.component'; // Assurez-vous d'importer le SignupComponent
 import { UsersComponent } from './users/users.component'; // Import the UsersComponent
+import { AboutComponent } from './about/about.component'; // Import the AboutComponent
+import { ContactComponent } from './contact/contact.component';
+import { ServicesComponent } from './services/services.component'
+import { PricingComponent } from './pricing/pricing.component'
 
-const routes: Routes = [
+
+
+const routes: Routes = [ //
+  { path: 'pricing', component: PricingComponent},
+  { path: 'services', component: ServicesComponent},
+  { path: 'contact', component: ContactComponent},
+  { path: 'about', component: AboutComponent }, // Add the About route
   { path: 'animals', component: AnimalsListComponent }, // Route pour la liste des animaux
   { path: 'appointments', component: AppointmentComponent }, // Route pour la liste des rendez-vous
   { path: 'login', component: LoginComponent }, // Route pour la page de connexion
