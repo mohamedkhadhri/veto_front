@@ -54,6 +54,10 @@ export class AnimalsListComponent implements OnInit {
     }
   }
 
+  onEditAnimal(id: number) {
+    this.router.navigate([`/animal/edit/${id}`]);
+  }
+
   onAddAnimal() {
     this.router.navigate(['/animal/add']);
   }

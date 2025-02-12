@@ -4,5 +4,6 @@ export interface Animal {
   age: number;
   race: string;
   image: string;
-  // Ajoutez d'autres propriétés si nécessaire
+  gender: string;
+  weight: number;
 }

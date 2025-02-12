@@ -1,25 +1,30 @@
-<!-- Affichage du chargement -->
-<div *ngIf="loading" class="loading">Chargement...</div>
+<div class="animal-container-wrapper">
+  <!-- Title with some space on top -->
+  <h2 class="page-title">Liste des Animaux</h2>
 
-<!-- Affichage des erreurs -->
-<div *ngIf="error" class="error">{{ error }}</div>
-
-<!-- Affichage de la liste des animaux si pas de chargement et s'il y a des animaux -->
-<div *ngIf="!loading && animals.length > 0" class="animal-container">
-  <h2>Liste des Animaux</h2>
-  <div class="animal-card" *ngFor="let animal of animals">
-    <img [src]="'assets/images/' + animal.image" alt="Image de l'animal" class="animal-image" />
-    <div class="card-content">
-      <h3 class="animal-name">{{ animal.name }}</h3>
-      <p class="animal-info"><strong>Âge:</strong> {{ animal.age }}</p>
-      <p class="animal-info"><strong>Race:</strong> {{ animal.race }}</p>
-      <button class="details-button" (click)="onDeleteAnimal(animal.id)">Supprimer</button>
+  <!-- List of animals -->
+  <div *ngIf="!loading && animals.length > 0" class="animal-container">
+    <div *ngFor="let animal of animals" class="animal-card">
+      <img src="assets/images/default-pet.png" alt="Image de l'animal" class="animal-image" />
+      <div class="card-content">
+        <h3 class="animal-name">{{ animal.name }}</h3>
+        <p class="animal-info"><strong>Âge:</strong> {{ animal.age }}</p>
+        <p class="animal-info"><strong>Race:</strong> {{ animal.race }}</p>
+        <p class="animal-info"><strong>Sexe:</strong> {{ animal.gender }}</p>
+        <p class="animal-info"><strong>Poids:</strong> {{ animal.weight }} kg</p>
+      </div>
+      <div class="button-container">
+        <button class="edit-button" (click)="onEditAnimal(animal.id)">Edit</button>
+        <button class="delete-button" (click)="onDeleteAnimal(animal.id)">Delete</button>
+      </div>
     </div>
   </div>
-  <button mat-raised-button color="primary" class="add-animal-button" (click)="onAddAnimal()">Ajouter un nouvel animal</button>
+
+  <!-- Display when no animals are found -->
+  <div *ngIf="!loading && animals.length === 0" class="no-animals">
+    <p>Aucun animal trouvé.</p>
+  </div>
 </div>
 
-<!-- Affichage si aucun animal n'est trouvé -->
-<div *ngIf="!loading && animals.length === 0" class="no-animals">
-  <p>Aucun animal trouvé.</p>
-</div>
+<!-- Add Animal Button - Positioned at the top right -->
+<button mat-raised-button color="primary" class="add-animal-button" (click)="onAddAnimal()">Ajouter un nouvel animal</button>

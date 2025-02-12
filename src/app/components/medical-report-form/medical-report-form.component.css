@@ -1,0 +1,81 @@
+.container {
+    padding: 3rem;
+    background-color: #f8fafc;  /* Light, modern background */
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    max-width: 800px;  /* Max width for form to prevent stretching too far */
+    margin: 0 auto;
+    color: #333;
+  }
+  
+  h2 {
+    font-size: 2rem;
+    color: #2c3e50;
+    font-weight: 700;
+    margin-bottom: 2rem;
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .mat-form-field {
+    width: 100%;  /* Make the fields take up the full width */
+  }
+  
+  textarea.mat-input-element {
+    font-size: 1rem;
+    padding: 16px;
+    border-radius: 10px;
+    background-color: #ecf0f1;  /* Subtle, light background */
+    border: 1px solid #bdc3c7;
+    width: 100%;
+    resize: vertical;
+    box-sizing: border-box;
+  }
+  
+  textarea.mat-input-element:focus {
+    border-color: #3498db;  /* Light blue border when focused */
+    box-shadow: 0 0 8px rgba(52, 152, 219, 0.4);
+  }
+  
+  button.submit-btn {
+    font-size: 1.1rem;
+    padding: 14px;
+    background-color: #3498db;  /* Blue button */
+    color: white;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+    width: 100%;  /* Make the button full-width */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  button.submit-btn:disabled {
+    background-color: #ccc;
+  }
+  
+  button.submit-btn:hover {
+    background-color: #2980b9;  /* Darker blue on hover */
+  }
+  
+  .mat-error {
+    font-size: 0.875rem;
+    color: #e74c3c;  /* Red color for error message */
+  }
+  
+  .full-width {
+    width: 100%;
+  }
+  
+  .form-actions {
+    margin-top: 1.5rem;
+  }
+  

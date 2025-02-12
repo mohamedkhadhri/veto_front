@@ -1,29 +1,31 @@
-<div class="container mt-4">
+<div class="container">
   <h2 class="text-center">Ajouter un Rapport Médical</h2>
   
-  <form [formGroup]="reportForm" (ngSubmit)="submitForm()">
-    <div class="mb-3">
-      <mat-form-field appearance="fill" class="w-100">
+  <form [formGroup]="reportForm" (ngSubmit)="submitForm()" class="form">
+    <div class="form-field">
+      <mat-form-field appearance="fill" class="full-width">
         <mat-label>Observation</mat-label>
-        <input matInput formControlName="observation" required />
+        <textarea matInput formControlName="observation" required rows="6"></textarea>
         <mat-error *ngIf="reportForm.get('observation')?.hasError('required')">
           L'observation est obligatoire.
         </mat-error>
       </mat-form-field>
     </div>
 
-    <div class="mb-3">
-      <mat-form-field appearance="fill" class="w-100">
+    <div class="form-field">
+      <mat-form-field appearance="fill" class="full-width">
         <mat-label>Historique Médical</mat-label>
-        <input matInput formControlName="medicalHistory" required />
+        <textarea matInput formControlName="medicalHistory" required rows="6"></textarea>
         <mat-error *ngIf="reportForm.get('medicalHistory')?.hasError('required')">
           L'historique médical est obligatoire.
         </mat-error>
       </mat-form-field>
     </div>
 
-    <button mat-raised-button color="primary" type="submit" [disabled]="reportForm.invalid" class="w-100">
-      Ajouter
-    </button>
+    <div class="form-actions">
+      <button mat-raised-button color="primary" type="submit" [disabled]="reportForm.invalid" class="submit-btn">
+        Ajouter
+      </button>
+    </div>
   </form>
 </div>
