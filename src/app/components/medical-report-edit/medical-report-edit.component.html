@@ -1,0 +1,27 @@
+<div class="container mt-4">
+    <h2 class="text-center">Modifier le Rapport Médical</h2>
+  
+    <mat-card *ngIf="reportForm">
+      <form [formGroup]="reportForm" (ngSubmit)="submitForm()">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Observation</mat-label>
+          <input matInput formControlName="observation" />
+        </mat-form-field>
+  
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Historique Médical</mat-label>
+          <input matInput formControlName="medicalHistory" />
+        </mat-form-field>
+  
+        <div class="form-actions">
+          <button mat-raised-button color="primary" type="submit" [disabled]="!reportForm.valid">
+            Sauvegarder les Modifications
+          </button>
+          <button mat-button type="button" (click)="router.navigate(['/medical-reports'])">
+            Annuler
+          </button>
+        </div>
+      </form>
+    </mat-card>
+  </div>
+  

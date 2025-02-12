@@ -1,12 +1,10 @@
 export interface Animal {
-    id: number;
-    name: string;
-    age: number;
-    race: string;
-    image: string;
-    gender: string;
-    weight: number;
-    vaccinations: any[];
-    medicalReports: any[];
-    owner?: string;
-  }
+  id: string;
+  name: string;
+  age: number;
+  gender: string;
+  race: string;
+  weight: number;
+  image?: string;
+  owner: string;
+}

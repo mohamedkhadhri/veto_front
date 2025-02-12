@@ -1,72 +1,91 @@
-/* Increase modal size */
+/* Global styles for the dialog container */
 ::ng-deep .mat-dialog-container {
-  min-width: 500px; /* Increase width */
-  max-width: 700px; /* Further adjust maximum width */
-  padding: 30px; /* Add more padding */
-  border-radius: 8px; /* Rounded corners for modern look */
-  background-color: #fff; /* White background for clean look */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
-  transition: all 0.3s ease-in-out; /* Smooth transition for opening */
+  min-width: 500px;
+  max-width: 700px;
+  padding: 30px;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+  position: relative; /* S'assurer que le contenu est bien positionné */
+  z-index: 1000; /* Appliquer un z-index pour garantir que la boîte de dialogue soit bien au-dessus */
 }
 
-/* Header style */
+/* Header */
 .mat-dialog-title {
   font-size: 1.5rem;
   font-weight: 600;
-  color: #333; /* Darker text for readability */
-  margin-bottom: 20px; /* Add space below header */
-  text-align: center; /* Center the header */
-}
-
-/* Form container for clean layout */
-.form-container {
-  display: grid;
-  gap: 24px; /* Add more space between fields */
+  color: #333;
+  text-align: center;
   margin-bottom: 20px;
 }
 
-/* Adjust form fields */
+/* Form styles */
+.form-container {
+  display: grid;
+  gap: 24px;
+}
+
 mat-form-field {
   width: 100%;
-  font-size: 1rem; /* Uniform font size for better readability */
 }
 
-/* Label style */
-mat-label {
-  font-weight: 500;
-  font-size: 1.1rem;
-  color: #555;
+mat-error {
+  font-size: 0.9rem;
+  color: #e74c3c;
 }
 
-/* Style for action buttons */
+/* Actions */
+mat-dialog-actions {
+  margin-top: 16px;
+}
+
 .dialog-actions {
   display: flex;
   justify-content: flex-end;
-  gap: 15px; /* Space between buttons */
+  gap: 15px;
 }
 
 .dialog-actions button {
   min-width: 120px;
   font-size: 1rem;
   padding: 10px 20px;
-  border-radius: 4px; /* Round button corners */
+  border-radius: 4px;
 }
 
 button.mat-raised-button {
-  text-transform: none; /* Prevent uppercase text */
+  text-transform: none;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button.mat-raised-button:hover {
+  transform: scale(1.05);
 }
 
 button.mat-raised-button.mat-primary {
-  background-color: #007bff; /* Primary button color */
+  background-color: #007bff;
   color: white;
 }
 
 button.mat-raised-button.mat-warn {
-  background-color: #e74c3c; /* Warning button color */
+  background-color: #e74c3c;
   color: white;
 }
 
-/* Datepicker input field styling */
-mat-input-element {
-  font-size: 1rem;
+/* Styles for ngx-timepicker to ensure it appears correctly above the dialog */
+::ng-deep .ngx-material-timepicker {
+  z-index: 2000; /* Assurez-vous que le timepicker s'affiche au-dessus du dialogue */
+}
+
+/* Responsive styles */
+@media (max-width: 600px) {
+  ::ng-deep .mat-dialog-container {
+    min-width: 90%;
+    padding: 15px;
+  }
+
+  .dialog-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
 }

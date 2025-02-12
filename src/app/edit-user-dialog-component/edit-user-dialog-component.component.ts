@@ -1,29 +1,27 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { AnimalsService } from '../services/animals.service';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { MatDialogModule } from '@angular/material/dialog';
+import { FormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material/dialog'; // Import MatDialogModule
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   standalone: true,
+  selector: 'app-edit-user-dialog',
+  templateUrl: './edit-user-dialog-component.component.html',
+  styleUrls: ['./edit-user-dialog-component.component.css'],
   imports: [
     CommonModule,
     FormsModule,
-    MatDialogModule,
+    MatDialogModule,  // Ensure MatDialogModule is imported
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule
-  ],
-  selector: 'app-edit-user-dialog',
-  templateUrl: './edit-user-dialog-component.component.html',
-  styleUrls: ['./edit-user-dialog-component.component.css']
+  ]
 })
-
 export class EditUserDialogComponent {
   user: any;
 

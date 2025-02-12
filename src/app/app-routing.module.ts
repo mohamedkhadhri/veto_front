@@ -3,28 +3,39 @@ import { RouterModule, Routes } from '@angular/router';
 
 // Importer les composants nécessaires
 import { AnimalsListComponent } from './animals-list/animals-list.component';
-import { AppointmentComponent } from './appointment/appointment.component'; // Importez le composant Appointment
-import { LoginComponent } from './auth/login/login.component'; // Assurez-vous d'importer le LoginComponent
-import { RegisterComponent } from './auth/signup/signup.component'; // Assurez-vous d'importer le SignupComponent
-import { UsersComponent } from './users/users.component'; // Import the UsersComponent
-import { AboutComponent } from './about/about.component'; // Import the AboutComponent
+import { AppointmentComponent } from './appointment/appointment.component';
+import { LoginComponent } from './auth/login/login.component';
+import { RegisterComponent } from './auth/signup/signup.component';
+import { UsersComponent } from './users/users.component';
+import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
-import { ServicesComponent } from './services/services.component'
-import { PricingComponent } from './pricing/pricing.component'
+import { ServicesComponent } from './services/services.component';
+import { PricingComponent } from './pricing/pricing.component';
 
+// Importer les composants MedicalReport
+import { MedicalReportListComponent } from '../app/components/medical-report-list/medical-report-list.component';
+import { MedicalReportDetailsComponent } from '../app/components/medical-report-details/medical-report-details.component';
+import { MedicalReportFormComponent } from '../app/components/medical-report-form/medical-report-form.component';
+import { MedicalReportEditComponent } from '../app/components/medical-report-edit/medical-report-edit.component';
 
+const routes: Routes = [
+  { path: 'pricing', component: PricingComponent },
+  { path: 'services', component: ServicesComponent },
+  { path: 'contact', component: ContactComponent },
+  { path: 'about', component: AboutComponent },
+  { path: 'animals', component: AnimalsListComponent },
+  { path: 'appointments', component: AppointmentComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'signup', component: RegisterComponent },
+  { path: 'users', component: UsersComponent },
 
-const routes: Routes = [ //
-  { path: 'pricing', component: PricingComponent},
-  { path: 'services', component: ServicesComponent},
-  { path: 'contact', component: ContactComponent},
-  { path: 'about', component: AboutComponent }, // Add the About route
-  { path: 'animals', component: AnimalsListComponent }, // Route pour la liste des animaux
-  { path: 'appointments', component: AppointmentComponent }, // Route pour la liste des rendez-vous
-  { path: 'login', component: LoginComponent }, // Route pour la page de connexion
-  { path: 'signup', component: RegisterComponent }, // Route pour la page d'inscription
-  { path: 'users', component: UsersComponent }, // Add a route for the UsersComponent
-  { path: '', redirectTo: '/login', pathMatch: 'full' }, // Redirection vers /login si l'URL est vide
+  // Routes pour Medical Reports
+  { path: 'medical-reports', component: MedicalReportListComponent },
+  { path: 'medical-reports/details/:id', component: MedicalReportDetailsComponent },
+  { path: 'medical-reports/edit/:id', component: MedicalReportEditComponent },
+  { path: 'medical-reports/add', component: MedicalReportFormComponent },
+
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', redirectTo: '/login' } // Si l'utilisateur entre une route incorrecte, redirigez-le vers login
 ];
 

@@ -13,7 +13,7 @@ import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker'; // Time p
 
 @Component({
   selector: 'app-appointment-dialog',
-  standalone: true,  // Indicating that this is a standalone component
+  standalone: true,
   imports: [
     CommonModule,
     MatFormFieldModule,
@@ -23,15 +23,16 @@ import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker'; // Time p
     MatDialogModule,
     MatDatepickerModule,
     NgxMaterialTimepickerModule,
-    FormsModule,  // Adding FormsModule for ngModel
-  ],  // Import necessary modules
+    FormsModule,
+  ],
   templateUrl: './appointment-dialog.component.html',
   styleUrls: ['./appointment-dialog.component.css'],
 })
 export class AppointmentDialogComponent {
   newAppointment: Appointment = {
     id: null,
-    date: new Date(),  // Initialize with the current date and time
+    date: new Date(),  // Initialiser avec la date actuelle
+    time: "",  // L'heure séparée comme chaîne
   };
 
   constructor(
@@ -39,17 +40,23 @@ export class AppointmentDialogComponent {
     @Inject(MAT_DIALOG_DATA) public data: Appointment | null
   ) {
     if (data) {
-      this.newAppointment = { ...data }; // Pre-fill the form if it's an edit
+      this.newAppointment = { ...data }; // Pré-remplir le formulaire si c'est une modification
     }
   }
 
   onSubmit(): void {
-    if (this.newAppointment.date) {
-      this.dialogRef.close(this.newAppointment); // Close the dialog and return the data
+    if (this.newAppointment.date && this.newAppointment.time) {
+      // Convertir la date et l'heure en une seule valeur si nécessaire
+      const dateTime = new Date(this.newAppointment.date);
+      const [hours, minutes] = this.newAppointment.time.split(':').map(Number);
+      dateTime.setHours(hours, minutes);
+      this.newAppointment.date = dateTime;
+
+      this.dialogRef.close(this.newAppointment); // Fermer la boîte de dialogue et retourner les données
     }
   }
 
   onCancel(): void {
-    this.dialogRef.close(); // Close the dialog without returning data
+    this.dialogRef.close(); // Fermer sans retourner de données
   }
 }

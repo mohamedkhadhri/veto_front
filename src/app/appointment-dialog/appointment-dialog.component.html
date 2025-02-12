@@ -1,10 +1,12 @@
-<h2 mat-dialog-title>Add Appointment</h2>
-<form (ngSubmit)="onSubmit()" #form="ngForm">
-  <div class="form-container">
-    <!-- Date Picker -->
-    <mat-form-field appearance="fill" class="form-group">
-      <mat-label>Date</mat-label>
-      <mat-datepicker #picker></mat-datepicker>
+<h2 mat-dialog-title>
+  {{ data ? 'Modifier le rendez-vous' : 'Créer un rendez-vous' }}
+</h2>
+
+<mat-dialog-content>
+  <form (ngSubmit)="onSubmit()">
+    <!-- Sélection de la date -->
+    <mat-form-field appearance="fill">
+      <mat-label>Date du rendez-vous</mat-label>
       <input
         matInput
         [matDatepicker]="picker"
@@ -12,25 +14,26 @@
         name="date"
         required
       />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
 
-    <!-- Time Picker -->
-    <mat-form-field appearance="fill" class="form-group">
-      <mat-label>Time</mat-label>
+    <!-- Sélection de l'heure (champ simplifié) -->
+    <mat-form-field appearance="fill">
+      <mat-label>Heure du rendez-vous</mat-label>
       <input
         matInput
-        [(ngModel)]="newAppointment.date"
+        type="time"
+        [(ngModel)]="newAppointment.time"
         name="time"
-        [ngxTimepicker]="timepicker"
+        placeholder="HH:mm"
         required
       />
-      <ngx-material-timepicker #timepicker></ngx-material-timepicker>
     </mat-form-field>
-  </div>
+  </form>
+</mat-dialog-content>
 
-  <!-- Action buttons -->
-  <div class="dialog-actions">
-    <button mat-raised-button color="primary" type="submit">Submit</button>
-    <button mat-raised-button color="warn" (click)="onCancel()">Cancel</button>
-  </div>
-</form>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Annuler</button>
+  <button mat-raised-button color="primary" (click)="onSubmit()">Enregistrer</button>
+</mat-dialog-actions>

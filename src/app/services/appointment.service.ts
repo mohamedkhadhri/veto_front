@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Appointment } from '../models/appointment.model';
-import { throwError } from 'rxjs';  // Ajouter cette ligne pour importer throwError
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AppointmentService {
   private apiUrl = 'http://localhost:4090/api/appo/'; // Backend API URL
@@ -16,8 +15,9 @@ export class AppointmentService {
   // Fetch all appointments
   getAllAppointments(): Observable<Appointment[]> {
     return this.http.get<Appointment[]>(`${this.apiUrl}`).pipe(
-      catchError(error => {
+      catchError((error) => {
         console.error('Error fetching appointments', error);
+        // You can log errors more specifically here (perhaps returning a user-friendly message)
         return of([]); // Return empty array in case of error
       })
     );
@@ -28,33 +28,30 @@ export class AppointmentService {
     return this.http.post<Appointment>(`${this.apiUrl}`, appointment).pipe(
       catchError((error) => {
         console.error('Error creating appointment', error);
-        // Throw an error instead of returning null
-        throw new Error('Error creating appointment');
+        // Throw an error to be handled by the component/service calling it
+        return throwError('Error creating appointment'); // Return an observable error
       })
     );
   }
-  
 
   // Update an existing appointment
   updateAppointment(id: number, appointment: Appointment): Observable<Appointment> {
     return this.http.put<Appointment>(`${this.apiUrl}${id}`, appointment).pipe(
       catchError((error) => {
         console.error('Error updating appointment', error);
-        return of({} as Appointment); // Return an empty object or handle it differently
+        // Return an empty object or handle it differently
+        return of({} as Appointment); // Or you can return throwError('Error updating appointment') to propagate the error
       })
     );
   }
-  
 
   // Delete an appointment
-  // appointment.service.ts
-deleteAppointment(id: number): Observable<any> {
-  return this.http.delete(`http://localhost:4090/api/appo/${id}`).pipe(
-    catchError((error) => {
-      console.error('Error deleting appointment', error);
-      return throwError(error);  // Renvoyer l'erreur pour la gestion en dehors de cette méthode
-    })
-  );
-}
-
+  deleteAppointment(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}${id}`).pipe(
+      catchError((error) => {
+        console.error('Error deleting appointment', error);
+        return throwError(error); // Renvoyer l'erreur pour la gestion en dehors de cette méthode
+      })
+    );
+  }
 }

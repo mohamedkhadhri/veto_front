@@ -14,7 +14,7 @@ import { AppointmentDialogComponent } from '../appointment-dialog/appointment-di
   templateUrl: './appointment.component.html',
   styleUrls: ['./appointment.component.css'],
   standalone: true,
-  imports: [CommonModule, MatTableModule, MatIconModule, MatButtonModule]
+  imports: [CommonModule, MatTableModule, MatIconModule, MatButtonModule],
 })
 export class AppointmentComponent {
   appointments: Appointment[] = [];
@@ -45,11 +45,11 @@ export class AppointmentComponent {
 
   openCreateDialog(): void {
     const dialogRef = this.dialog.open(AppointmentDialogComponent, {
-      width: '500px',  // Set the width as per new design
-      height: 'auto',  // Make sure it adapts to content height
-      panelClass: 'custom-dialog-container'  // Optional: Define custom dialog styles
+      width: '500px',
+      height: 'auto',
+      panelClass: 'custom-dialog-container',
     });
-  
+
     dialogRef.afterClosed().subscribe((result: Appointment | undefined) => {
       if (result) {
         this.appointmentService.createAppointment(result).subscribe(
@@ -69,7 +69,6 @@ export class AppointmentComponent {
       }
     });
   }
-  
 
   editAppointment(appointment: Appointment): void {
     const dialogRef = this.dialog.open(AppointmentDialogComponent, {
@@ -82,20 +81,30 @@ export class AppointmentComponent {
         this.appointmentService.updateAppointment(result.id, result).subscribe(
           (updatedAppointment) => {
             if (updatedAppointment) {
-              const index = this.appointments.findIndex(a => a.id === updatedAppointment.id);
+              const index = this.appointments.findIndex(
+                (a) => a.id === updatedAppointment.id
+              );
               if (index !== -1) {
                 this.appointments[index] = updatedAppointment;
-                this.snackBar.open('Rendez-vous mis à jour avec succès', 'Fermer', {
-                  duration: 3000,
-                });
+                this.snackBar.open(
+                  'Rendez-vous mis à jour avec succès',
+                  'Fermer',
+                  {
+                    duration: 3000,
+                  }
+                );
                 this.loadAppointments();
               }
             }
           },
           () => {
-            this.snackBar.open('Erreur lors de la mise à jour du rendez-vous', 'Fermer', {
-              duration: 3000,
-            });
+            this.snackBar.open(
+              'Erreur lors de la mise à jour du rendez-vous',
+              'Fermer',
+              {
+                duration: 3000,
+              }
+            );
           }
         );
       }
@@ -123,10 +132,42 @@ export class AppointmentComponent {
   }
 
   acceptAppointment(appointment: Appointment): void {
-    
+    if (appointment.id) {
+      const updatedAppointment: Appointment = { ...appointment, status: 'Accepted' };
+
+      this.appointmentService.updateAppointment(appointment.id, updatedAppointment).subscribe(
+        () => {
+          this.snackBar.open('Rendez-vous accepté avec succès', 'Fermer', {
+            duration: 3000,
+          });
+          this.loadAppointments();
+        },
+        () => {
+          this.snackBar.open('Échec de l’acceptation du rendez-vous', 'Fermer', {
+            duration: 3000,
+          });
+        }
+      );
+    }
   }
 
   rejectAppointment(appointment: Appointment): void {
-    
+    if (appointment.id) {
+      const updatedAppointment: Appointment = { ...appointment, status: 'Rejected' };
+
+      this.appointmentService.updateAppointment(appointment.id, updatedAppointment).subscribe(
+        () => {
+          this.snackBar.open('Rendez-vous rejeté avec succès', 'Fermer', {
+            duration: 3000,
+          });
+          this.loadAppointments();
+        },
+        () => {
+          this.snackBar.open('Échec du rejet du rendez-vous', 'Fermer', {
+            duration: 3000,
+          });
+        }
+      );
+    }
   }
 }

@@ -6,40 +6,55 @@ import { Animal } from '../models/animal.model';
   selector: 'app-animals-list',
   templateUrl: './animals-list.component.html',
   styleUrls: ['./animals-list.component.css'],
-  standalone: false
+  standalone: false  // Si c'est un composant autonome
 })
 export class AnimalsListComponent implements OnInit {
   animals: Animal[] = [];
 
   constructor(private animalService: AnimalsService) {}
 
-  ngOnInit() {
-    this.getAllUsers();
+  ngOnInit(): void {
+    this.getAllAnimals();  // Appel de la méthode getAllAnimals
   }
 
-  getAllUsers() {
-    this.animalService.getAllUsers().subscribe(
-      (response: any[]) => {
-        console.log("USERS:", response);
-        this.animals = response.flatMap(user => 
-          user.animals.map((animal: Animal) => ({
-            ...animal,
-            owner: user.username
-          }))
-        );
+  // Récupérer tous les animaux
+  getAllAnimals() {
+    this.animalService.getAllAnimals().subscribe(
+      (response) => {
+        console.log('Animals:', response);
+        this.animals = response;  // Mise à jour de la liste des animaux
       },
       (error) => {
-        console.log("ERROR:", error);
+        console.error('Error fetching animals:', error);
       }
     );
   }
 
+  // Afficher les détails d'un animal
   onDetailsClick(animal: Animal) {
-    alert(`You clicked on ${animal.name} owned by ${animal.owner}`);
+    alert(`You clicked on ${animal.name}`);  // Affichage des détails dans une alerte pour l'instant
   }
 
+  // Définir l'image par défaut si elle ne se charge pas
   setDefaultImage(event: Event) {
     const imgElement = event.target as HTMLImageElement;
-    imgElement.src = 'assets/images/default-pet.png';
+    imgElement.src = 'assets/images/default-pet.png';  // Image par défaut
+  }
+
+  // Supprimer un animal
+  onDeleteClick(animal: Animal) {
+    const confirmation = confirm(`Are you sure you want to delete ${animal.name}?`);
+    if (confirmation) {
+      this.animalService.deleteAnimal(animal.id).subscribe(
+        () => {
+          this.animals = this.animals.filter(a => a.id !== animal.id);  // Supprimer l'animal de la liste
+          alert(`${animal.name} has been deleted successfully.`);
+        },
+        (error) => {
+          console.error('Error deleting animal:', error);
+          alert('Error deleting animal. Please try again later.');
+        }
+      );
+    }
   }
 }

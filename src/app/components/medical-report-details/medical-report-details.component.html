@@ -1,0 +1,16 @@
+<div class="container mt-4">
+  <div *ngIf="report" class="card shadow p-4">
+    <h2 class="text-center">Détails du Rapport Médical</h2>
+    <hr>
+    <p><strong>ID :</strong> {{ report?.id }}</p>
+    <p><strong>Observation :</strong> {{ report?.observation }}</p>
+    <p><strong>Historique Médical :</strong> {{ report?.medicalHistory }}</p>
+    <p><strong>ID Utilisateur :</strong> {{ report?.userId || 'N/A' }}</p>
+    <p><strong>ID Animal :</strong> {{ report?.animalId || 'N/A' }}</p>
+    <a routerLink="/" class="btn btn-secondary">Retour à la liste</a>
+  </div>
+  <div *ngIf="!report" class="alert alert-danger text-center">
+    <p>Rapport non trouvé !</p>
+    <a routerLink="/" class="btn btn-primary">Retour</a>
+  </div>
+</div>
