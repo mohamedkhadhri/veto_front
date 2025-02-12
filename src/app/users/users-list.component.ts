@@ -28,7 +28,7 @@ import { CreateUserDialogComponent } from '../create-user-dialog/create-user-dia
 })
 export class UsersComponent implements OnInit {
   users$!: Observable<any>;
-  displayedColumns: string[] = ['username', 'email', 'roles', 'actions'];
+  displayedColumns: string[] = ['username', 'email', 'password', 'roles', 'actions'];
   dataSource!: MatTableDataSource<any>;
 
   // Utilisation de @Inject pour résoudre le problème d'injection
