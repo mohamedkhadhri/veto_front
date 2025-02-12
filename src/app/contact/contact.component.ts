@@ -31,11 +31,19 @@ import { FormsModule } from '@angular/forms';
             </mat-form-field>
             <mat-form-field>
               <mat-label>Email</mat-label>
-              <input matInput [(ngModel)]="contact.email" name="email" required>
+              <input matInput type="email" [(ngModel)]="contact.email" name="email" required>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Phone Number</mat-label>
+              <input matInput type="tel" [(ngModel)]="contact.phone" name="phone">
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Subject</mat-label>
+              <input matInput [(ngModel)]="contact.subject" name="subject">
             </mat-form-field>
             <mat-form-field>
               <mat-label>Message</mat-label>
-              <textarea matInput [(ngModel)]="contact.message" name="message" required></textarea>
+              <textarea matInput [(ngModel)]="contact.message" name="message" required rows="6"></textarea>
             </mat-form-field>
             <button mat-raised-button color="accent" type="submit" [disabled]="!contactForm.form.valid">Submit</button>
           </form>
@@ -51,9 +59,10 @@ import { FormsModule } from '@angular/forms';
   `]
 })
 export class ContactComponent {
-  contact = { name: '', email: '', message: '' };
+  contact = { name: '', email: '', phone: '', subject: '', message: '' };
 
   onSubmit() {
     console.log('Form submitted!', this.contact);
-  }
+    this.contact = { name: '', email: '', phone: '', subject: '', message: '' }; // Clear all fields
+  }  
 }

@@ -40,16 +40,88 @@ import { MatIconModule } from '@angular/material/icon';
     </div>
   `,
   styles: [`
-    .about-container { text-align: center; padding: 40px; background: linear-gradient(135deg, #f6d365 0%, #fda085 100%); color: #fff; }
-    .hero { padding: 40px; margin-bottom: 50px; background: rgba(255, 255, 255, 0.2); border-radius: 10px; }
-    .features { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 20px; }
-    .feature-card { width: 30%; padding: 20px; text-align: center; background: rgba(255, 255, 255, 0.3); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-    .feature-icon { font-size: 40px; color: #ffeb3b; }
-    .team { margin-top: 60px; text-align: center; }
-    .team-members { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 30px; }
-    .member { width: 220px; text-align: center; background: rgba(255, 255, 255, 0.2); padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); display: flex; flex-direction: column; align-items: center; }
-    img { width: 120px; height: 120px; border-radius: 50%; border: 3px solid #ffeb3b; display: block; margin: 0 auto; }
-    h2 { text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); }
+    html, body, .about-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh; /* Take full height of the viewport */
+  background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+  color: #fff;
+}
+
+    
+    .hero {
+      width: 80%;
+      max-width: 600px;
+      padding: 40px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .features {
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .feature-card {
+      width: 30%;
+      padding: 20px;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .feature-icon {
+      font-size: 40px;
+      color: #ffeb3b;
+    }
+
+    .team {
+      width: 100%;
+      text-align: center;
+      padding: 40px;
+    }
+
+    .team-members {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+
+    .member {
+      width: 220px;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 3px solid #ffeb3b;
+      display: block;
+      margin: 0 auto;
+    }
+
+    h2 {
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    }
   `]
 })
 export class AboutComponent {
@@ -61,7 +133,7 @@ export class AboutComponent {
 
   team = [
     { name: 'Abidi Wael', role: 'Developer', photo: 'assets/images/wael_pic.jpg' },
-    { name: 'Khedhri Mohamed', role: 'Doctor', photo: 'assets/images/wael_pic.jpg' },
-    { name: 'Khamessi Nader', role: 'Admin', photo: 'assets/images/wael_pic.jpg' }
+    { name: 'Khedhri Mohamed', role: 'Doctor', photo: 'assets/images/hama.jpg' },
+    { name: 'Khamessi Nader', role: 'Admin', photo: 'assets/images/nader.jpg' }
   ];
 }

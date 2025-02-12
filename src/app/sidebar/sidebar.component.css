@@ -1,23 +1,43 @@
-/* sidebar.component.css */
-
+/* Ensure sidebar takes full height and width */
 .sidenav-container {
-    display: flex;
-    height: 100vh;
-  }
-  
-  mat-sidenav {
-    width: 250px;
-    background-color: #3f51b5;
-    color: white;
-  }
-  
-  mat-sidenav a {
-    color: white;
-    font-size: 16px;
-    padding: 16px;
-  }
-  
-  mat-sidenav a.active-link {
-    background-color: #5c6bc0;
-  }
-  
+  display: flex;
+  height: 100vh;
+  width: 100vw; /* Ensures full width */
+}
+
+/* Main content area (right side) */
+mat-sidenav-content {
+  flex: 1; /* Fills remaining space */
+  width: 100%; /* Ensures it takes full width */
+  height: 100vh; /* Full height */
+  overflow-x: hidden; /* Prevents horizontal scrolling */
+}
+
+/* Sidebar (left navigation panel) */
+mat-sidenav {
+  width: 250px;
+  background-color: #2C3E50; /* Updated color (dark gray) */
+  color: white;
+  border-radius: 0; /* Removes rounded corners */
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2); /* Optional shadow for depth */
+}
+
+/* Sidebar links */
+mat-sidenav a {
+  color: white;
+  font-size: 16px;
+  padding: 16px;
+  text-decoration: none;
+  display: block;
+  transition: background 0.3s ease;
+}
+
+/* Active link */
+mat-sidenav a.active-link {
+  background-color: #374f67; /* Slightly lighter shade for active link */
+}
+
+/* Hover effect */
+mat-sidenav a:hover {
+  background-color: #1E2B38; /* Darker shade on hover */
+}
