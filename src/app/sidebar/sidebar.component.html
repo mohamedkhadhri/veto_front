@@ -1,0 +1,34 @@
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #sidenav mode="side" opened>
+      <mat-nav-list>
+        <!-- Lien vers Liste des utilisateurs -->
+        <a mat-list-item routerLink="/users" routerLinkActive="active-link">
+          Liste Utilisateurs
+        </a>
+  
+        <!-- Lien vers Liste des animaux -->
+        <a mat-list-item routerLink="/animals" routerLinkActive="active-link">
+          Liste Animaux
+        </a>
+  
+        <!-- Lien vers Liste des rendez-vous -->
+        <a mat-list-item routerLink="/appointments" routerLinkActive="active-link">
+          Liste Rendez-vous
+        </a>
+  
+        <!-- Autres liens, si nécessaire -->
+        <a mat-list-item routerLink="/about" routerLinkActive="active-link">
+          À propos
+        </a>
+  
+        <a mat-list-item routerLink="/contact" routerLinkActive="active-link">
+          Contact
+        </a>
+      </mat-nav-list>
+    </mat-sidenav>
+  
+    <mat-sidenav-content>
+      <router-outlet></router-outlet> <!-- Affiche le contenu de la route active -->
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+  

@@ -1,60 +1,60 @@
 import { Component, OnInit } from '@angular/core';
 import { AnimalsService } from '../services/animals.service';
-import { Animal } from '../models/animal.model';
+import { Animal } from '../models/animal.model';  // Assurez-vous que ce modèle est correct
+import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';  // Import de CommonModule pour utiliser ngIf et ngFor
 
 @Component({
   selector: 'app-animals-list',
   templateUrl: './animals-list.component.html',
   styleUrls: ['./animals-list.component.css'],
-  standalone: false  // Si c'est un composant autonome
+  standalone: true,  // Déclarer que le composant est autonome
+  imports: [CommonModule]  // Import de CommonModule pour rendre ngIf et autres directives disponibles
 })
 export class AnimalsListComponent implements OnInit {
   animals: Animal[] = [];
+  loading: boolean = true;
+  error: string | null = null;
 
-  constructor(private animalService: AnimalsService) {}
+  constructor(
+    private animalsService: AnimalsService,  // Injection de service
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    this.getAllAnimals();  // Appel de la méthode getAllAnimals
+    this.getAllAnimals();
   }
 
-  // Récupérer tous les animaux
   getAllAnimals() {
-    this.animalService.getAllAnimals().subscribe(
+    this.animalsService.getAllAnimals().subscribe(
       (response) => {
-        console.log('Animals:', response);
-        this.animals = response;  // Mise à jour de la liste des animaux
+        this.animals = response;
+        this.loading = false;
       },
       (error) => {
-        console.error('Error fetching animals:', error);
+        this.error = 'Erreur lors de la récupération des animaux';
+        this.loading = false;
       }
     );
   }
 
-  // Afficher les détails d'un animal
-  onDetailsClick(animal: Animal) {
-    alert(`You clicked on ${animal.name}`);  // Affichage des détails dans une alerte pour l'instant
-  }
-
-  // Définir l'image par défaut si elle ne se charge pas
-  setDefaultImage(event: Event) {
-    const imgElement = event.target as HTMLImageElement;
-    imgElement.src = 'assets/images/default-pet.png';  // Image par défaut
-  }
-
-  // Supprimer un animal
-  onDeleteClick(animal: Animal) {
-    const confirmation = confirm(`Are you sure you want to delete ${animal.name}?`);
+  onDeleteAnimal(id: number) {
+    const confirmation = confirm('Êtes-vous sûr de vouloir supprimer cet animal ?');
     if (confirmation) {
-      this.animalService.deleteAnimal(animal.id).subscribe(
+      this.animalsService.deleteAnimal(id).subscribe(
         () => {
-          this.animals = this.animals.filter(a => a.id !== animal.id);  // Supprimer l'animal de la liste
-          alert(`${animal.name} has been deleted successfully.`);
+          this.animals = this.animals.filter((animal) => animal.id !== id);
+          alert('L\'animal a été supprimé avec succès.');
         },
         (error) => {
-          console.error('Error deleting animal:', error);
-          alert('Error deleting animal. Please try again later.');
+          console.error('Erreur lors de la suppression de l\'animal:', error);
+          alert('Erreur lors de la suppression de l\'animal.');
         }
       );
     }
+  }
+
+  onAddAnimal() {
+    this.router.navigate(['/animal/add']);
   }
 }

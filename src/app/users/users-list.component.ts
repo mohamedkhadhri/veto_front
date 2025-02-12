@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { AnimalsService } from '../services/animals.service';
+import { Component, OnInit, Inject } from '@angular/core';
+import { UserService } from '../services/users.service';  // Importez UsersService
 import { Observable } from 'rxjs';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
@@ -9,7 +9,6 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { CommonModule } from '@angular/common';
-import { MatDialogRef } from '@angular/material/dialog';
 import { EditUserDialogComponent } from '../edit-user-dialog-component/edit-user-dialog-component.component';
 import { CreateUserDialogComponent } from '../create-user-dialog/create-user-dialog.component';
 
@@ -25,23 +24,29 @@ import { CreateUserDialogComponent } from '../create-user-dialog/create-user-dia
     MatSortModule
   ],
   templateUrl: './users.component.html',
-  styleUrls: ['./users.component.css']
+  styleUrls: ['./users-list.component.css']
 })
 export class UsersComponent implements OnInit {
   users$!: Observable<any>;
-  displayedColumns: string[] = ['username', 'email', 'password', 'roles', 'actions'];
+  displayedColumns: string[] = ['username', 'email', 'roles', 'actions'];
   dataSource!: MatTableDataSource<any>;
 
-  constructor(private animalsService: AnimalsService, public dialog: MatDialog) {}
+  // Utilisation de @Inject pour résoudre le problème d'injection
+  constructor(@Inject(UserService) private usersService: UserService, public dialog: MatDialog) {}
 
   ngOnInit() {
-    this.users$ = this.animalsService.getAllUsers();
+    this.loadUsers();
+  }
+
+  // Méthode pour charger les utilisateurs et mettre à jour la source de données
+  loadUsers() {
+    this.users$ = this.usersService.getUsers();
     this.users$.subscribe((users: any) => {
       this.dataSource = new MatTableDataSource(users);
     });
   }
 
-  // Open the Edit User dialog
+  // Ouvrir le dialogue pour modifier un utilisateur
   editUser(user: any) {
     const dialogRef = this.dialog.open(EditUserDialogComponent, {
       width: '400px',
@@ -50,41 +55,35 @@ export class UsersComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        // Update the table data after editing
-        this.users$ = this.animalsService.getAllUsers();
-        this.users$.subscribe((users: any) => {
-          this.dataSource = new MatTableDataSource(users);
-        });
+        // Mettre à jour la table après modification
+        this.loadUsers(); // Rafraîchir les utilisateurs
       }
     });
   }
 
+  // Supprimer un utilisateur
   deleteUser(user: any) {
-    this.animalsService.deleteUser(user.id).subscribe(() => {
-      // Remove the deleted user from the data source
+    this.usersService.deleteUser(user.id).subscribe(() => {
+      // Retirer l'utilisateur supprimé de la source de données
       const updatedData = this.dataSource.data.filter(u => u.id !== user.id);
-      this.dataSource.data = [...updatedData]; // Force table refresh
+      this.dataSource.data = [...updatedData]; // Forcer le rafraîchissement de la table
     });
   }
 
+  // Ouvrir le dialogue pour créer un utilisateur
   createUser() {
     const dialogRef = this.dialog.open(CreateUserDialogComponent, {
       width: '400px',
-      data: { user: { username: '', email: '', password: '', roles: ['doc'] } } // Default role
+      data: { user: { username: '', email: '', password: '', roles: ['doc'] } } // Rôle par défaut
     });
   
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.animalsService.createUser(result).subscribe(() => {
-          // Refresh table after user creation
-          this.users$ = this.animalsService.getAllUsers();
-          this.users$.subscribe((users: any) => {
-            this.dataSource.data = users;
-          });
+        this.usersService.addUser(result).subscribe(() => {
+          // Rafraîchir la table après la création d'un utilisateur
+          this.loadUsers(); // Recharger la liste des utilisateurs
         });
       }
     });
   }
-  
-
 }

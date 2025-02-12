@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AnimalsListComponent } from './animals-list/animals-list.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms'; // Pour les formulaires réactifs
 import { FormsModule } from '@angular/forms'; // Pour ngModel
@@ -27,22 +26,23 @@ import { RegisterComponent } from './auth/signup/signup.component';
 
 // Importation des composants standalone
 import { LoginComponent } from './auth/login/login.component';
-import { UsersComponent } from './users/users.component';
-import { EditUserDialogComponent } from './edit-user-dialog-component/edit-user-dialog-component.component';
+import { UsersComponent } from './users/users-list.component';
 import { CreateUserDialogComponent } from './create-user-dialog/create-user-dialog.component';
-import { MedicalReportListComponent } from './components/medical-report-list/medical-report-list.component';  // Importer le composant standalone
+import { EditUserDialogComponent } from './edit-user-dialog-component/edit-user-dialog-component.component'; // Composant standalone
+import { MedicalReportListComponent } from './components/medical-report-list/medical-report-list.component'; // Composant standalone
 import { MedicalReportFormComponent } from './components/medical-report-form/medical-report-form.component'; // Composant standalone
-import { MedicalReportDetailsComponent } from './components/medical-report-details/medical-report-details.component';  // Composant standalone
+import { MedicalReportDetailsComponent } from './components/medical-report-details/medical-report-details.component'; // Composant standalone
 import { MedicalReportEditComponent } from './components/medical-report-edit/medical-report-edit.component'; // Composant standalone
+import { AnimalsListComponent } from './animals-list/animals-list.component';
+import { SidebarComponent } from './sidebar/sidebar.component'; // Composant standalone
 
 @NgModule({
   declarations: [
     AppComponent,
-    AnimalsListComponent,
     HeaderComponent,
     FooterComponent,
     CreateUserDialogComponent,
-    // Ne déclarez plus les composants standalone ici
+    // Ne déclarez pas Sidebar ici car c'est un composant standalone
   ],
   imports: [
     BrowserModule,
@@ -60,15 +60,18 @@ import { MedicalReportEditComponent } from './components/medical-report-edit/med
     MatListModule, // Listes
     MatDialogModule, // Dialogues modaux
     MatTableModule, // Importer MatTableModule pour le tableau
-    MatNativeDateModule, // Ajoutez ici MatNativeDateModule pour gérer les dates
+    MatNativeDateModule, // Gestion des dates
 
-    // Importation des composants standalone ici
+    // Importation des composants standalone
     LoginComponent,
     RegisterComponent,
-    MedicalReportListComponent,  // Ajouter MedicalReportListComponent dans imports
-    MedicalReportFormComponent,  // Ajouter MedicalReportFormComponent dans imports
-    MedicalReportDetailsComponent,  // Ajouter MedicalReportDetailsComponent dans imports
-    MedicalReportEditComponent  // Ajouter MedicalReportEditComponent dans imports
+    MedicalReportListComponent,
+    MedicalReportFormComponent,
+    MedicalReportDetailsComponent,
+    MedicalReportEditComponent,
+    AnimalsListComponent,
+    EditUserDialogComponent, // Ajout dans imports
+    SidebarComponent, // Sidebar ajouté ici en tant que composant standalone
   ],
   providers: [],
   bootstrap: [AppComponent]

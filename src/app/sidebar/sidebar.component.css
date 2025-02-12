@@ -1,0 +1,23 @@
+/* sidebar.component.css */
+
+.sidenav-container {
+    display: flex;
+    height: 100vh;
+  }
+  
+  mat-sidenav {
+    width: 250px;
+    background-color: #3f51b5;
+    color: white;
+  }
+  
+  mat-sidenav a {
+    color: white;
+    font-size: 16px;
+    padding: 16px;
+  }
+  
+  mat-sidenav a.active-link {
+    background-color: #5c6bc0;
+  }
+  

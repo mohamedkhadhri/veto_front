@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { AnimalsService } from '../services/animals.service';
+import { UserService } from '../services/users.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   standalone: false,
@@ -9,20 +10,42 @@ import { AnimalsService } from '../services/animals.service';
   styleUrls: ['./create-user-dialog.component.css']
 })
 export class CreateUserDialogComponent {
-  user: any = { username: '', email: '', password: '', role: ['admin'] };
+  userForm: FormGroup;
 
   constructor(
     public dialogRef: MatDialogRef<CreateUserDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private animalsService: AnimalsService
+    private formBuilder: FormBuilder,
+    private userService: UserService
   ) {
-    this.user = data.user || { username: '', email: '', password: '', role: ['doc'] };
+    // Initialiser le formulaire avec validation et définir le rôle par défaut à ['doc']
+    this.userForm = this.formBuilder.group({
+      username: ['', [Validators.required, Validators.maxLength(20)]],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      role: ['doc', [Validators.required]]  // Valeur par défaut du rôle
+    });
   }
 
+  // Sauvegarde de l'utilisateur
   save() {
-    this.dialogRef.close(this.user);
+    if (this.userForm.invalid) {
+      return;
+    }
+
+    // Envoi des données du formulaire via le UserService
+    this.userService.addUser(this.userForm.value).subscribe(
+      (newUser) => {
+        this.dialogRef.close(newUser);  // Fermer le dialogue avec l'utilisateur ajouté
+      },
+      (error) => {
+        console.error('Erreur lors de la création de l\'utilisateur:', error);
+        alert('Une erreur est survenue lors de la création de l\'utilisateur.');
+      }
+    );
   }
 
+  // Annulation de la création de l'utilisateur
   cancel() {
     this.dialogRef.close(null);
   }

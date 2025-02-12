@@ -1,10 +1,8 @@
 export interface Animal {
-  id: string;
+  id: number;
   name: string;
   age: number;
-  gender: string;
   race: string;
-  weight: number;
-  image?: string;
-  owner: string;
+  image: string;
+  // Ajoutez d'autres propriétés si nécessaire
 }

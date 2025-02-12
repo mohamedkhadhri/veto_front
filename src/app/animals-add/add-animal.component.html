@@ -1,0 +1,34 @@
+<form [formGroup]="animalForm" (ngSubmit)="addAnimal()" class="animal-form">
+  <h2>Ajouter un Nouvel Animal</h2>
+
+  <div class="form-group">
+    <label for="name">Nom de l'animal:</label>
+    <input id="name" formControlName="name" type="text" />
+    <div *ngIf="animalForm.get('name')?.invalid && animalForm.get('name')?.touched" class="error">
+      <small>Le nom de l'animal est requis.</small>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="age">Âge de l'animal:</label>
+    <input id="age" formControlName="age" type="number" />
+    <div *ngIf="animalForm.get('age')?.invalid && animalForm.get('age')?.touched" class="error">
+      <small>L'âge de l'animal doit être un nombre positif.</small>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="race">Race de l'animal:</label>
+    <input id="race" formControlName="race" type="text" />
+    <div *ngIf="animalForm.get('race')?.invalid && animalForm.get('race')?.touched" class="error">
+      <small>La race de l'animal est requise.</small>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="image">Image de l'animal (facultatif):</label>
+    <input id="image" formControlName="image" type="text" />
+  </div>
+
+  <button type="submit" [disabled]="animalForm.invalid">Ajouter l'animal</button>
+</form>

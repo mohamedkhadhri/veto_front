@@ -1,53 +1,54 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { AnimalsService } from '../services/animals.service';
 import { Animal } from '../models/animal.model';
-import { HttpErrorResponse } from '@angular/common/http';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';  // Reactive Forms imports
-import { HttpClientModule } from '@angular/common/http'; // Import HttpClientModule here
-import { ReactiveFormsModule } from '@angular/forms'; // Import ReactiveFormsModule here
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-animals-add',
-  templateUrl: './animals-add.component.html',
-  styleUrls: ['./animals-add.component.css'],
-  standalone: true,  // <-- Mark this component as standalone
-  imports: [ReactiveFormsModule, HttpClientModule]  // Import necessary modules directly
+  selector: 'app-add-animal',
+  standalone: true,  // Définir le composant comme standalone
+  imports: [
+    CommonModule,
+    ReactiveFormsModule  // Importer ReactiveFormsModule directement
+  ],
+  templateUrl: './add-animal.component.html',
+  styleUrls: ['./add-animal.component.css'],
 })
-export class AnimalsAddComponent {
-  animalForm: FormGroup;  // FormGroup for managing the form
-
+export class AddAnimalComponent {
+  animalForm: FormGroup;
+  
   constructor(
-    private animalService: AnimalsService,
-    private fb: FormBuilder  // Injecting FormBuilder for reactive forms
+    private animalsService: AnimalsService,
+    private router: Router,
+    private fb: FormBuilder
   ) {
-    // Initialize the form with validations
+    // Créez le formulaire avec des validations
     this.animalForm = this.fb.group({
       name: ['', Validators.required],
-      age: [0, [Validators.required, Validators.min(0)]],
+      age: ['', [Validators.required, Validators.min(0)]],
       race: ['', Validators.required],
-      gender: ['', Validators.required],
-      weight: [0, [Validators.required, Validators.min(0)]],
       image: [''],
-      owner: ['', Validators.required],
     });
   }
 
-  // Method to create a new animal
-  createAnimal() {
-    if (this.animalForm.invalid) {
-      return;  // If form is invalid, prevent submission
+  // Méthode pour soumettre le formulaire
+  addAnimal() {
+    if (this.animalForm.valid) {
+      const animalData: Animal = this.animalForm.value;
+      this.animalsService.createAnimal(animalData).subscribe(
+        (response) => {
+          alert('Animal ajouté avec succès!');
+          this.router.navigate(['/animals']);
+        },
+        (error) => {
+          console.error('Erreur lors de l\'ajout de l\'animal:', error);
+          alert('Erreur lors de l\'ajout de l\'animal.');
+        }
+      );
+    } else {
+      alert('Veuillez remplir correctement le formulaire');
     }
-
-    // Create a new animal by passing form data
-    this.animalService.registerAnimal(this.animalForm.value).subscribe(
-      (response) => {
-        alert('Animal created successfully!');
-        this.animalForm.reset();  // Reset form after success
-      },
-      (error: HttpErrorResponse) => {  // Handle errors
-        console.error('Error creating animal:', error.message);
-        alert(`Error: ${error.message}`);  // Display a message to the user
-      }
-    );
   }
 }
