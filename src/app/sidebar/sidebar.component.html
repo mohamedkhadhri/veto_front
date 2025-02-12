@@ -1,43 +1,20 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #sidenav mode="side" opened>
+  <!-- Sidebar: Will be hidden on Login & Register pages -->
+  <mat-sidenav #sidenav mode="side" opened *ngIf="!shouldHideSidebar()">
     <mat-nav-list>
-      <!-- Lien vers Liste des utilisateurs -->
-      <a mat-list-item routerLink="/users" routerLinkActive="active-link">
-        Users
-      </a>
-
-      <!-- Lien vers Liste des animaux -->
-      <a mat-list-item routerLink="/animals" routerLinkActive="active-link">
-        Pets
-      </a>
-
-      <!-- Lien vers Liste des rendez-vous -->
-      <a mat-list-item routerLink="/appointments" routerLinkActive="active-link">
-        Appointments
-      </a>
-
-      <!-- Lien vers Pricing -->
-      <a mat-list-item routerLink="/pricing" routerLinkActive="active-link">
-        Pricing
-      </a>
-
-      <!-- Lien vers Rapports Médicaux -->
-      <a mat-list-item routerLink="/medical-reports" routerLinkActive="active-link">
-        Medical Reports
-      </a>
-
-      <!-- Autres liens, si nécessaire -->
-      <a mat-list-item routerLink="/about" routerLinkActive="active-link">
-        About
-      </a>
-
-      <a mat-list-item routerLink="/contact" routerLinkActive="active-link">
-        Contact
-      </a>
+      <a mat-list-item routerLink="/users" routerLinkActive="active-link">Users</a>
+      <a mat-list-item routerLink="/animals" routerLinkActive="active-link">Pets</a>
+      <a mat-list-item routerLink="/appointments" routerLinkActive="active-link">Appointments</a>
+      <a mat-list-item routerLink="/medical-reports" routerLinkActive="active-link">Medical Reports</a>
+      <a mat-list-item routerLink="/services" routerLinkActive="active-link">Services</a>
+      <a mat-list-item routerLink="/pricing" routerLinkActive="active-link">Pricing</a>
+      <a mat-list-item routerLink="/contact" routerLinkActive="active-link">Contact</a>
+      <a mat-list-item routerLink="/about" routerLinkActive="active-link">About</a>
     </mat-nav-list>
   </mat-sidenav>
 
+  <!-- Main Content: Always visible -->
   <mat-sidenav-content>
-    <router-outlet></router-outlet> <!-- Affiche le contenu de la route active -->
+    <router-outlet></router-outlet> <!-- Login & Signup Pages Still Show -->
   </mat-sidenav-content>
 </mat-sidenav-container>

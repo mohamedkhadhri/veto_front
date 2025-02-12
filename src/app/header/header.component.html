@@ -1,15 +1,28 @@
 <mat-toolbar class="header-toolbar" color="primary">
     <div class="header-container">
-        <img src="assets/images/veterinary.png" alt="Clinic Logo" class="logo">
-        <nav class="nav-menu">
-            <a mat-button routerLink="/services">Services</a>
-            <a mat-button routerLink="/pricing">Pricing</a>
-            <a mat-button routerLink="/contact">Contact us</a>
-            <a mat-button routerLink="/about">About Us</a>
-        </nav>
-        <div class="header-buttons">
-            <button mat-button routerLink="/login">Sign In</button>
-            <button mat-raised-button color="accent" routerLink="/signup">Register</button>
-        </div>
+      <img src="assets/images/veterinary.png" alt="Clinic Logo" class="logo">
+      
+      <nav class="nav-menu">
+        <a mat-button routerLink="/services">Services</a>
+        <a mat-button routerLink="/pricing">Pricing</a>
+        <a mat-button routerLink="/contact">Contact us</a>
+        <a mat-button routerLink="/about">About Us</a>
+      </nav>
+  
+      <div class="header-buttons">
+        <!-- Show Login and Register buttons only on /login or /signup -->
+        <ng-container *ngIf="isLoginOrSignupPage(); else logoutButtons">
+          <button mat-button routerLink="/login">Sign In</button>
+          <button mat-raised-button color="accent" routerLink="/signup">Register</button>
+        </ng-container>
+  
+        <!-- Logout button for all other pages -->
+        <ng-template #logoutButtons>
+          <button mat-raised-button class="logout-button" routerLink="/login">
+            <mat-icon>logout</mat-icon> Logout
+          </button>
+        </ng-template>
+      </div>
     </div>
-</mat-toolbar>
+  </mat-toolbar>
+  

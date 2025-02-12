@@ -3,6 +3,7 @@ import { RouterModule } from '@angular/router'; // Importer RouterModule pour ut
 import { MatSidenavModule } from '@angular/material/sidenav'; // Importer le module MatSidenavModule
 import { MatListModule } from '@angular/material/list'; // Importer MatListModule pour les listes
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // Importer les animations
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -16,4 +17,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
     BrowserAnimationsModule // Importer BrowserAnimationsModule pour activer les animations
   ]
 })
-export class SidebarComponent {}
+export class SidebarComponent {
+  constructor(private router: Router) {}
+
+  shouldHideSidebar(): boolean {
+    const hiddenRoutes = ['/login', '/signup'];
+    return hiddenRoutes.includes(this.router.url);
+  }
+}
