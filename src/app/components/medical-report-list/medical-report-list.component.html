@@ -1,44 +1,41 @@
-<div class="container mt-4">
-  <h2 class="text-center">Liste des Rapports Médicaux</h2>
-  <table mat-table [dataSource]="dataSource" class="table table-striped">
-    
-    <!-- Définition des colonnes -->
+<div class="container">
+  <div class="header">
+    <h2>Liste des Rapports Médicaux</h2>
+    <button mat-raised-button color="primary" (click)="navigateToAddReport()">
+      <mat-icon>add</mat-icon>
+      Ajouter un Rapport
+    </button>
+  </div>
+  
+  <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
     <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef> ID </th>
-      <td mat-cell *matCellDef="let report">{{ report.id }}</td>
+      <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+      <mat-cell *matCellDef="let report">{{ report.id }}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="observation">
-      <th mat-header-cell *matHeaderCellDef> Observation </th>
-      <td mat-cell *matCellDef="let report">{{ report.observation }}</td>
+      <mat-header-cell *matHeaderCellDef> Observation </mat-header-cell>
+      <mat-cell *matCellDef="let report">{{ report.observation }}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="medicalHistory">
-      <th mat-header-cell *matHeaderCellDef> Historique Médical </th>
-      <td mat-cell *matCellDef="let report">{{ report.medicalHistory }}</td>
+      <mat-header-cell *matHeaderCellDef> Historique Médical </mat-header-cell>
+      <mat-cell *matCellDef="let report">{{ report.medicalHistory }}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="actions">
-      <th mat-header-cell *matHeaderCellDef> Actions </th>
-      <td mat-cell *matCellDef="let report">
-        <!-- Bouton pour supprimer le rapport -->
-        <button mat-button color="accent" (click)="deleteReport(report.id!)">
-          Supprimer
+      <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+      <mat-cell *matCellDef="let report">
+        <button mat-icon-button color="accent" (click)="deleteReport(report.id!)">
+          <mat-icon>delete</mat-icon>
         </button>
-        <!-- Bouton pour éditer le rapport -->
-        <button mat-button color="primary" (click)="navigateToEditReport(report.id!)">
-          Éditer
+        <button mat-icon-button color="primary" (click)="navigateToEditReport(report.id!)">
+          <mat-icon>edit</mat-icon>
         </button>
-      </td>
+      </mat-cell>
     </ng-container>
 
-    <!-- Ligne d'en-tête -->
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-
-    <!-- Ligne du corps -->
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-
-  <!-- Bouton pour naviguer vers la page d'ajout de rapport -->
-  <button mat-raised-button color="primary" (click)="navigateToAddReport()">Ajouter un Rapport</button>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
 </div>
